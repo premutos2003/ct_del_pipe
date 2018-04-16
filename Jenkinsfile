@@ -5,7 +5,7 @@ node {
             deleteDir()
             sh '''
             ls
-            git clone ${GIT_URL}
+            git clone https://github.com/premutos2003/ct_node_basic.git
             cd ./ct_node_basic/infrastructure
             aws s3 cp s3://${STACK}-${PROJECT_NAME}/state/terraform.tfstate terraform.tfstate  --region ${REGION}
             aws s3 cp  s3://${STACK}-${PROJECT_NAME}/state/terraform.tfstate.backup terraform.tfstate.backup --region ${REGION}
