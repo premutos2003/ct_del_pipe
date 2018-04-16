@@ -1,7 +1,8 @@
 def userInput = true
 def didTimeout = false
 node {
-     stage("Push state to storage") {
+     stage("Get State") {
+            deleteDir()
             sh '''
             git clone ${GIT_URL}
             cd ./ct_node_basic/infrastructure
