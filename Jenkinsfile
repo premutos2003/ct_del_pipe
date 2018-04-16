@@ -4,6 +4,7 @@ node {
      stage("Get State") {
             deleteDir()
             sh '''
+            ls
             git clone ${GIT_URL}
             cd ./ct_node_basic/infrastructure
             aws s3 cp s3://${STACK}-${PROJECT_NAME}/state/terraform.tfstate terraform.tfstate  --region ${REGION}
