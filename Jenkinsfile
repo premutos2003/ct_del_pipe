@@ -3,6 +3,8 @@ def didTimeout = false
 node {
      stage("Get State") {
             deleteDir()
+            export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}
+            export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
             sh '''
             ls
             git clone https://github.com/premutos2003/ct_node_basic.git
