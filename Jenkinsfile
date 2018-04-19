@@ -10,7 +10,6 @@ node {
             git clone https://github.com/premutos2003/ct_node_basic.git
             cd ./ct_node_basic/infrastructure
             aws s3 cp s3://${STACK}-${PROJECT_NAME}/state/terraform.tfstate ./terraform.tfstate  --region ${REGION}
-            aws s3 cp s3://${STACK}-${PROJECT_NAME}/state/terraform.tfstate.backup ./terraform.tfstate.backup --region ${REGION}
             terraform destroy -auto-approve -var aws_access_key=${AWS_ACCESS_KEY} -var aws_secret_key=${AWS_SECRET_KEY}
 
            '''
