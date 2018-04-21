@@ -5,10 +5,11 @@ node {
             deleteDir()
 
             sh '''
+                echo ${PROJECT_NAME}
                 export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}
                         export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
-
-            str=$(curl -v -sS 'docker.for.mac.localhost:3000/app_infra?app_id=$PROJECT_NAME' | jq -r '.[0]')
+            url=docker.for.mac.localhost:3000/app_infra?app_id=${PROJECT_NAME}
+            str=$(curl -v -sS $url| jq -r '.[0]')
             instance_id=$(echo $str | jq -r '.app_instance_id')
 
             aws ec2 terminate-instances --instance-ids $instance_id --region ${REGION}
