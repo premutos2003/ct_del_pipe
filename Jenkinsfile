@@ -11,7 +11,7 @@ node {
             str=$(curl -v -sS 'docker.for.mac.localhost:3000/app_infra' | jq -r '.[0]')
             instance_id=$(echo $str | jq -r '.app_instance_id')
 
-            aws ec2 terminate-instances --instance-ids $instance_id
+            aws ec2 terminate-instances --instance-ids $instance_id --region ${REGION}
 
             git clone https://github.com/premutos2003/ct_node_basic.git
             cd ./ct_node_basic/infrastructure
