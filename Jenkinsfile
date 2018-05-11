@@ -15,7 +15,7 @@ node {
             aws ec2 terminate-instances --instance-ids $instance_id --region ${REGION}
 
             git clone https://github.com/premutos2003/ct_node_basic.git
-            cd ./key
+            cd ./ct_node_basic/key
             aws s3 cp s3://${STACK}-${PROJECT_NAME}/keystate/terraform.tfstate ./terraform.tfstate  --region ${REGION}
             terraform init
             terraform  destroy -force -var aws_access_key=${AWS_ACCESS_KEY} -var aws_secret_key=${AWS_SECRET_KEY}
