@@ -27,5 +27,11 @@ node {
 
            '''
         }
+        stage("Remove from DB") {
+
+                            sh '''
+                                curl -X POST -d stack=${STACK} -d env=${ENV} -d regions=${REGION} host.docker.internal:3000/remove_infra/delete
+                           '''
+                        }
 
 }
