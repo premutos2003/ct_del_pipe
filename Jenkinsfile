@@ -18,7 +18,7 @@ node {
             cd ./ct_node_basic/key
             aws s3 cp s3://app-state-${STACK}-${PROJECT_NAME}/keystate/terraform.tfstate ./terraform.tfstate  --region ${REGION}
             terraform init
-            terraform  destroy region=${REGION} -force -var aws_access_key=${AWS_ACCESS_KEY} -var aws_secret_key=${AWS_SECRET_KEY}
+            terraform  destroy -var region=${REGION} -force -var aws_access_key=${AWS_ACCESS_KEY} -var aws_secret_key=${AWS_SECRET_KEY}
 
             cd ../infrastructure
             aws s3 cp s3://app-state-${STACK}-${PROJECT_NAME}/state/terraform.tfstate ./terraform.tfstate  --region ${REGION}
