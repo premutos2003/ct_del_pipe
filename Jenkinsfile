@@ -8,7 +8,7 @@ node {
                 echo ${PROJECT_NAME}
                 export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}
                         export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
-            url=host.docker.internal:3000/app_infra?id=${PROJECT_NAME}-${ENV}
+            url=host.docker.internal:3000/apps/infra/${PROJECT_NAME}-${ENV}
             str=$(curl -v -sS $url| jq -r '.[0]')
             instance_id=$(echo $str | jq -r '.app_instance_id')
 
@@ -30,7 +30,7 @@ node {
         stage("Remove from DB") {
 
                             sh '''
-                                curl -X POST -d app_id=${PROJECT_NAME} -d stack=${STACK} -d env=${ENV} -d regions=${REGION} host.docker.internal:3000/remove_infra/delete
+                                curl -X POST -d app_id=${PROJECT_NAME} -d stack=${STACK} -d env=${ENV} -d regions=${REGION} host.docker.internal:3000/apps/delete
                            '''
                         }
 
