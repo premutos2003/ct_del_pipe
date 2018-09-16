@@ -16,12 +16,12 @@ node {
 
             git clone https://github.com/premutos2003/ct_node_basic.git
             cd ./ct_node_basic/key
-            aws s3 cp s3://app-state-${STACK}-${PROJECT_NAME}/keystate/terraform.tfstate ./terraform.tfstate  --region ${REGION}
+            aws s3 cp s3://${ENV}-infra-base/apps/${STACK}-${PROJECT_NAME}/keystate/terraform.tfstate ./terraform.tfstate --region ${REGION}
             terraform init
             terraform  destroy -var region=${REGION} -force -var aws_access_key=${AWS_ACCESS_KEY} -var aws_secret_key=${AWS_SECRET_KEY}
 
             cd ../infrastructure
-            aws s3 cp s3://app-state-${STACK}-${PROJECT_NAME}/state/terraform.tfstate ./terraform.tfstate  --region ${REGION}
+            aws s3 cp s3://${ENV}-infra-base/apps/${STACK}-${PROJECT_NAME}/state/terraform.tfstate ./terraform.tfstate  --region ${REGION}
             terraform init
             terraform destroy -var region=${REGION} -force --target=aws_iam_policy_attachment.deploy_policy_attachment --target=aws_iam_instance_profile.deploy_profile --target=aws_iam_role.deploy_role --target=aws_iam_policy.deploy_policy --target=aws_s3_bucket.s3_bucket_deploy_artefact -var aws_access_key=${AWS_ACCESS_KEY} -var aws_secret_key=${AWS_SECRET_KEY}
 
